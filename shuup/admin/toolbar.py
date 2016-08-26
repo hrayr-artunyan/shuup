@@ -101,6 +101,36 @@ class URLActionButton(BaseActionButton):
             yield '</a>'
 
 
+class SettingsActionButton(URLActionButton):
+    """
+    A generic settings button meant to be used across many modules
+    """
+
+    def __init__(self, url, **kwargs):
+        kwargs.setdefault("icon", "fa fa-cog")
+        kwargs.setdefault("text", _("Settings"))
+        kwargs.setdefault("extra_css_class", "btn-default btn-inverse")
+        super(SettingsActionButton, self).__init__(url, **kwargs)
+
+    @classmethod
+    def for_model(cls, model, **kwargs):
+        """
+        Generate a SettingsActionButton for a model, auto-wiring the URL.
+
+        :param model: Model class
+        :rtype: shuup.admin.toolbar.SettingsActionButton|None
+        """
+
+        if "url" not in kwargs:
+            try:
+                url = get_model_url(model, kind="settings")
+            except NoModelUrl:
+                return None
+            kwargs["url"] = url
+
+        return cls(**kwargs)
+
+
 class NewActionButton(URLActionButton):
     """
     An URL button with sane "new" visual semantics

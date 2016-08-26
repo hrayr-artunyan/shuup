@@ -12,13 +12,14 @@ from .edit_cross_sell import ProductCrossSellEditView
 from .edit_media import ProductMediaEditView
 from .edit_package import ProductPackageView
 from .edit_variation import ProductVariationView
-from .list import ProductListView
+from .list import ProductListView, ProductSettingsView
 
 __all__ = [
     "ProductCrossSellEditView",
     "ProductDeleteView",
     "ProductEditView",
     "ProductListView",
+    "ProductSettingsView",
     "ProductPackageView",
     "ProductVariationView",
     "ProductMediaEditView",
